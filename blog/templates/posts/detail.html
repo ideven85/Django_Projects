@@ -62,15 +62,16 @@
   </div>
 </div>
     
-    <span>                 <button type="submit" class="btn btn-primary">
+                   <button type="submit" class="btn btn-primary">
      <a href="{% url 'core:post_comment'  post.id%}" style="color:black;
 text-decoration: none">Add A Comment</a>
          </button>
     
+<div class="d-flex p-2"> <a href="{% url 'core:post_list' %}">All Posts</a></div>
 
   
 
-        <a href="{% url 'core:post_list' %}">All Posts</a>
+       
   
-    </span>
+    
 {% endblock %}

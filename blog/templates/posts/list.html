@@ -3,17 +3,52 @@
 {% block title %} All Published Blogs {% endblock %}
 
 {% block content %}
-    <div class="accordion">
-    <h1>My Blog</h1>
-    {% for post in posts %}
-        <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
-        <p class="date">
-            Pubished on {{ post.publish }} by {{ post.author.first_name }}
-        </p>
-        <div class="content">
-            {{ post.body|truncatewords:30|linebreaks}}
+   <div class="d-grid gap-7">
+        {% for post in posts %}
+  <!-- Card -->
+  <div class="card card-flush card-stretched-vertical">
+    <div class="row">
+     
+      <!-- End Col -->
+
+      <div class="col-sm-7">
+         
+        <!-- Card Body -->
+        <div class="card-body">
+          
+
+          <h3 class="card-title">
+              <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+          </h3>
+
+          <p class="card-text">{{ post.body|truncatewords:30|linebreaks }}</p>
+
+          <!-- Card Footer -->
+          <div class="card-footer">
+            <div class="d-flex">
+             
+
+              <div class="flex-grow-1 ms-3">
+                <a class="card-link link-dark" href="#"> By {{ post.author.first_name}}</a>
+                <p class="card-text small"> Created on {{ post.created }}</p>
+              </div>
+            </div>
+          </div>
+          <!-- End Card Footer -->
         </div>
-    {% endfor %}
+         
+        <!-- End Card Body -->
+      </div>
+      <!-- End Col -->
     </div>
-    {% include 'pagination.html' with page=posts %}
+    <!-- End Row -->
+  </div>
+        {% endfor %}
+  <!-- End Card -->
+
+  <!-- Card -->
+  <!-- End Card -->
+</div>
+
+   
 {% endblock %}
