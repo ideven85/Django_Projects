@@ -11,7 +11,7 @@
             Pubished on {{ post.publish }} by {{ post.author.first_name }}
         </p>
         <div class="content">
-            {{ post.body|truncatewords:30|linebreaks }}
+            {{ post.body|truncatewords:30|linebreaks}}
         </div>
     {% endfor %}
     </div>

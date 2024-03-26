@@ -1,27 +1,76 @@
 {% extends 'base.html' %}
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
-    <div class="content">
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.body|linebreaks }}</p>
-    <div class="card">
-        <div class="card-body">
-            {% with comments.count as total_comments %}
-                <h2>{{ total_comments }} comment {{ total_comments|pluralize }}</h2>
-            {% endwith %}
-        {% for comment in comments %}
-            <p class="info">
-            Comment {{ forloop.counter }} by {{ comment.name }}
-            {{ comment.created }}
-                </p>
-            {{ comment.body|linebreaks }}
-            {% empty %}
-            <p>There are no comments yet</p>
-           {% endfor %}
-        <a href="{% url 'core:post_comment'  post.id%}">Add A Comment</a>
-        </div>
+    <div class="card" >
+  <div class="card-body">
+    <h3 class="card-title">{{ post.title}}</h3>
+    <p class="card-text">{{ post.body|linebreaks }}</p>
+    <p class="card-text">
+      <small class="text-muted">{{ post.updated }}</small>
+    </p>
+  </div>
     </div>
+  <!-- Comment -->
+<div class="container content-space-1 content-space-lg-3">
+  <!-- Heading -->
+  <div class="w-md-75 w-lg-50 text-center mx-md-auto mb-5 mb-md-9">
+    <h2> {% with comments.count as total_comments %}
+                <h2>{{ total_comments }} comments</h2>
+            {% endwith %}</h2>
+  </div>
+  <!-- End Heading -->
+  <div class="row justify-content-lg-center">
+    <div class="col-lg-8">
+            {% for comment in comments %}            
+
+    <ul class="list-comment">
+        <!-- Item -->
+        <li class="list-comment-item">
+          <!-- Media -->
+          <div class="d-flex align-items-center mb-3">
+           
+
+            <div class="flex-grow-1 ms-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <h6>{{ comment.name }}</h6>
+                <span class="d-block small text-muted">{{ comment.created}}</span>
+              </div>
+            </div>
+          </div>
+          <!-- End Media -->
+
+            <p>{{ comment.body|linebreaks }}</p>
+
+          <a class="link" href="#">Reply</a>
+
     
+      <!-- Comment -->
+      
+
+      <!-- End Comment -->
+       
+        </li>
+    </ul>
+ {% endfor %}
+    <!-- End Col -->
+
+<!-- End Comment -->
+           
+        
+          
+        </div>
+  </div>
+</div>
+    
+    <span>                 <button type="submit" class="btn btn-primary">
+     <a href="{% url 'core:post_comment'  post.id%}" style="color:black;
+text-decoration: none">Add A Comment</a>
+         </button>
+    
+
+  
+
         <a href="{% url 'core:post_list' %}">All Posts</a>
-    </div>
+  
+    </span>
 {% endblock %}
