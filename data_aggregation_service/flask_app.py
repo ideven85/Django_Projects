@@ -13,7 +13,8 @@ app = Flask(__name__)
 def hello_world():  # put application's code here
     data = request.json
     df = pd.DataFrame(data,index=[0])
-    response = df.describe().to_json()
+    response = df.aggregate().to_json()
+    print(response)
     return response
 
 
