@@ -1,0 +1,8 @@
+<h1 style="background-color: powderblue">{{ result.question_text }}</h1>
+<br />
+<ul>
+    {% for choice in result.Question.all %}
+        <l1>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</l1><br />
+    {% endfor %}
+</ul>
+<a href="{% url 'detail' result.id %}">Try Again?</a>
