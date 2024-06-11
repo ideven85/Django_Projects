@@ -14,9 +14,8 @@ def questions(request):
 
 def detail(request,question_id):
     question = get_object_or_404(Question,pk=question_id)
-    choices = Choices.objects.get(pk=question_id)
-    print(choices)
-    return render(request,'detail.html',{'question': question,"choices": choices})
+
+    return render(request,'detail.html',{'question': question})
 
 
 def vote(request, question_id):
