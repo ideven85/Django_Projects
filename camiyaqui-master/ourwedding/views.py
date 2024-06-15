@@ -8,8 +8,8 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.utils.translation import ugettext as _
-from django.utils.translation import LANGUAGE_SESSION_KEY
+from django.utils.translation import gettext as _
+from django.utils.translation import _trans
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, UpdateView, DetailView, CreateView, FormView
 from django.views.generic.base import View, TemplateView
@@ -66,7 +66,7 @@ class GuestLogin(View):
             login(request, user)
             request.user = user
             request.session['guest'] = user.pk
-            request.session[LANGUAGE_SESSION_KEY] = user.profile.language
+            request.session[_trans] = user.profile.language
             messages.success(request, _(f'Welcome back {user}!'))
             if form.cleaned_data.get('next'):
                 return redirect(form.cleaned_data.get('next'))

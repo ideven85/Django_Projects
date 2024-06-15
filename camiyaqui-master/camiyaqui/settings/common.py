@@ -1,5 +1,5 @@
 from django.contrib.messages import constants as messages
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 import os
 
 
@@ -35,7 +35,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'backend.middleware.PageViewMiddleware',
+     #'backend.middleware.PageViewMiddleware',
 ]
 
 ROOT_URLCONF = 'camiyaqui.urls'
@@ -92,11 +92,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-DEFAULT_WEDDING_REPLY_EMAIL = 'camiyaqui@camiyaqui.com'
-DEFAULT_WEDDING_FROM_EMAIL = 'camiyaqui@camiyaqui.com'
+DEFAULT_WEDDING_REPLY_EMAIL = 'deven@localhost.com'
+DEFAULT_WEDDING_FROM_EMAIL = 'deven@localhost.com'
 
-DEFAULT_EMAIL_FROM = 'Camila & Aquiles <camiyaqui@camiyaqui.com>'
-EMAIL_FROM = 'Camila & Aquiles <camiyaqui@camiyaqui.com>'
+DEFAULT_EMAIL_FROM = 'Camila & Aquiles <deven@localhost.com>'
+EMAIL_FROM = 'Camila & Aquiles <deven@localhost.com>'
 
 ESPANOL = 'es'
 ENGLISH = 'en'
@@ -138,3 +138,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = '/static/'
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

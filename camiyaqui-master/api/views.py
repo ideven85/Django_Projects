@@ -11,8 +11,8 @@ from api.serializers import GuestSerializer, TokenSerializer, RsvpSerializer, Ne
     MessageSerializer, LoginSerializer, APITokenSerializer, RegisterSerializer, UserSerializer, \
     RequestAccessCodeSerializer, PhotoSerializer, PhotoConfirmSerializer, NewsSerializer
 from backend.models import News
-from camiyaqui.settings.aws_credentials import AWS_BUCKET_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, \
-    AWS_BUCKET_NAME
+#from camiyaqui.settings.aws_credentials import AWS_BUCKET_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, \
+#    AWS_BUCKET_NAME
 from ourwedding.models import Profile, Group, MessageFromGuest, Guest
 from photos.models import FileItem
 
@@ -214,10 +214,6 @@ class PhotoUploadPolicy(views.APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        s3 = boto3.client('s3',
-                          region_name=AWS_BUCKET_REGION,
-                          aws_access_key_id=AWS_ACCESS_KEY_ID,
-                          aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
 
         username_str = str(user.username)
         file_obj_id = file_obj.id
@@ -233,20 +229,8 @@ class PhotoUploadPolicy(views.APIView):
         file_obj.extension = file_extension[1:]
         file_obj.save()
 
-        presigned_post = s3.generate_presigned_post(
-            Bucket=AWS_BUCKET_NAME,
-            Key=final_upload_path,
-            Fields={"acl": "private", "Content-Type": ""},
-            Conditions=[
-                {"acl": "private"},
-                {"Content-Type": ""}
-            ],
-            ExpiresIn=3600
-        )
 
-        data = {'policy': presigned_post,
-                'file_id': file_obj_id
-                }
+
 
         return Response(data, status=status.HTTP_200_OK)
 

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.utils.http import base36_to_int
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from ourwedding.models import MessageFromGuest, Guest
 from ourwedding.models import Profile
 from ourwedding.tokens import login_token_generator

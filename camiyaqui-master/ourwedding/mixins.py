@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import AccessMixin
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.utils.timezone import now
-from django.utils.translation import ugettext as _, LANGUAGE_SESSION_KEY
+from django.utils.translation import gettext as _, _trans as LANGUAGE_SESSION_KEY
 
 
 class GuestMixin(AccessMixin):

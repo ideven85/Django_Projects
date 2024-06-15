@@ -7,19 +7,19 @@ import random
 import boto3
 from django.contrib.auth.models import User
 from django.shortcuts import render
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, CreateView
 from django.views.generic.base import View
 from rest_framework import permissions, status, authentication
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from camiyaqui.settings.aws_credentials import (
-    AWS_ACCESS_KEY_ID,
-    AWS_BUCKET_NAME,
-    AWS_BUCKET_REGION,
-    AWS_SECRET_ACCESS_KEY,
-)
+# from camiyaqui.settings.aws_credentials import (
+#     AWS_ACCESS_KEY_ID,
+#     AWS_BUCKET_NAME,
+#     AWS_BUCKET_REGION,
+#     AWS_SECRET_ACCESS_KEY,
+# )
 from ourwedding.mixins import GuestMixin
 from .models import FileItem, Album
 
@@ -49,10 +49,10 @@ class FilePolicyAPI(APIView):
             except Album.DoesNotExist:
                 album = None
 
-        s3 = boto3.client('s3',
-                          region_name=AWS_BUCKET_REGION,
-                          aws_access_key_id=AWS_ACCESS_KEY_ID,
-                          aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+        # s3 = boto3.client('s3',
+        #                   region_name=AWS_BUCKET_REGION,
+        #                   aws_access_key_id=AWS_ACCESS_KEY_ID,
+        #                   aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
 
         if not filename_req:
             return Response({"message": "A filename is required"}, status=status.HTTP_400_BAD_REQUEST)
@@ -74,22 +74,22 @@ class FilePolicyAPI(APIView):
         file_obj.save()
 
 
-        presigned_post = s3.generate_presigned_post(
-            Bucket=AWS_BUCKET_NAME,
-            Key=final_upload_path,
-            Fields={"acl": "private", "Content-Type": ""},
-            Conditions=[
-                {"acl": "private"},
-                {"Content-Type": ""}
-            ],
-            ExpiresIn=3600
-        )
+        # presigned_post = s3.generate_presigned_post(
+        #     Bucket=AWS_BUCKET_NAME,
+        #     Key=final_upload_path,
+        #     Fields={"acl": "private", "Content-Type": ""},
+        #     Conditions=[
+        #         {"acl": "private"},
+        #         {"Content-Type": ""}
+        #     ],
+        #     ExpiresIn=3600
+        # )
 
-        data = {'policy': presigned_post,
-                'file_id': file_obj_id
-                }
+        # data = {'policy': presigned_post,
+        #         'file_id': file_obj_id
+        #         }
 
-        return Response(data, status=status.HTTP_200_OK)
+        return Response(None, status=status.HTTP_200_OK)
 
 
 class FileUploadCompleteHandler(APIView):
