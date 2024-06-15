@@ -6,23 +6,27 @@ from core.models import Item,ItemTag,ItemImage,Category
 # Register your models here.
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ['name','price']
+    list_display = ['name','price','description'[:20],]
     prepopulated_fields = {'slug':('name', )}
+    search_fields = ['name']
+    ordering = ('price',)
+
 @admin.register(ItemTag)
 class ItemTagAdmin(admin.ModelAdmin):
-    list_display = ['name','active']
+    list_display = ['name','active','description'[:20]]
 
     prepopulated_fields = {'slug': ('name',)}
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name',]
+    list_display = ['category',]
 
 
 @admin.register(ItemImage)
 class ItemImage(admin.ModelAdmin):
-    list_display = ['thumbnail_tag','item']
+    list_display = ['item','thumbnail_tag']
     readonly_fields = ('thumbnail',)
+
 
     def thumbnail_tag(self, obj):
         if obj.thumbnail:
